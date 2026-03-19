@@ -1,145 +1,147 @@
 -- 1. Llista el nom de tots els productes que hi ha en la taula producto.
 SELECT 
-	nombre 
+	p.nombre 
 FROM
-	tienda.producto;
+	tienda.producto p;
     
 -- 2. Llista els noms i els preus de tots els productes de la taula producto.
 SELECT 	
-	nombre, 
-	precio 
+	p.nombre, 
+	p.precio 
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 3. Llista totes les columnes de la taula producto.
 SELECT * FROM tienda.producto; 
 
 -- 4. Llista el nom dels productes, el preu en euros (precio_eur) i el preu en dòlars estatunidencs (precio_usd) amb un tipus de canvi de 1 € = 1 $.
 SELECT 
-	nombre, 
-	precio AS precio_eur, 
-	precio * 1 AS precio_usd
+	p.nombre, 
+	p.precio AS precio_eur, 
+	p.precio * 1 AS precio_usd
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 5. Llista el nom dels productes, el preu en euros i el preu en dòlars estatunidencs (amb un tipus de canvi de 1 € = 1,1 $ i arrodonint el resultat a dues xifres decimals). Utilitza els següents àlies per a les columnes: nom del producte, euros, dòlars.
 SELECT 
-	nombre AS `nom del product`, 
-	precio AS euros, 
-    ROUND(precio * 1.1, 2) AS dòlars
+	p.nombre AS `nom del producte`, 
+	p.precio AS euros, 
+    ROUND(p.precio * 1.1, 2) AS dòlars
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 6. Llista els noms (nombre) i els preus de tots els productes de la taula producto, convertint els noms a majúscula.
 SELECT 
-	UPPER(nombre) AS nombre, 
-	precio 
+	UPPER(p.nombre) AS nombre, 
+	p.precio 
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 7. Llista els noms (nombre) i els preus (precio) dels productes de la taula producto, convertint els noms a minúscula.
 SELECT 
-	LOWER(nombre) AS nombre, 
-	precio AS precio
+	LOWER(p.nombre) AS nombre, 
+	p.precio AS precio
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 8. Llista el nom de tots els fabricants en una columna, i en una altra columna obtingui en majúscules els dos primers caràcters del nom del fabricant (iniciales).
 SELECT 
-	nombre, 
-	UPPER(LEFT(nombre, 2)) AS iniciales
+	f.nombre, 
+	UPPER(LEFT(f.nombre, 2)) AS iniciales
 FROM 
-	tienda.fabricante;
+	tienda.fabricante f;
     
 -- 9. Llista els noms i els preus dels productes, arrodonint el valor del preu (precio)
 SELECT 
-	nombre,
-	ROUND(precio) AS precio
+	p.nombre,
+	ROUND(p.precio) AS precio
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 10. Llista els noms i els preus de tots els productes (precio truncado) de la taula producto, truncant el valor del preu per a mostrar-lo sense cap xifra decimal.
 SELECT 
-	nombre,
-	TRUNCATE(precio, 0) AS `precio truncado`
+	p.nombre,
+	TRUNCATE(p.precio, 0) AS `precio truncado`
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 11. Mostra una llista amb els codis dels fabricants que apareixen a la taula producto, incloent possibles repeticions.
 SELECT 
-	codigo_fabricante 
+	p.codigo_fabricante 
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 12. Llista el codi dels fabricants que tenen productes en la taula producto, eliminant els codis que apareixen repetits.
 SELECT DISTINCT
-	codigo_fabricante 
+	p.codigo_fabricante 
 FROM 
-	tienda.producto;
+	tienda.producto p;
     
 -- 13. Llista els noms dels fabricants ordenats de manera ascendent
 SELECT 
-	nombre 
+	f.nombre 
 FROM 
-	tienda.fabricante
-ORDER BY nombre ASC;
+	tienda.fabricante f
+ORDER BY f.nombre ASC;
 
 -- 14. Llista els noms dels fabricants ordenats de manera descendent
 SELECT 
-	nombre 
+	f.nombre 
 FROM 
-	tienda.fabricante
-ORDER BY nombre DESC;
+	tienda.fabricante f
+ORDER BY f.nombre DESC;
 
 -- 15. Llista els noms i els preus dels productes ordenats, en primer lloc, pel nom de manera ascendent i, en segon lloc, pel preu de manera descendent.
 SELECT 
-	nombre,
-    precio
+	p.nombre,
+    p.precio
 FROM 
-	tienda.producto
+	tienda.producto p
 ORDER BY 
-	nombre ASC,
-	precio DESC;
+	p.nombre ASC,
+	p.precio DESC;
     
 -- 16. Retorna una llista amb les 5 primeres files de la taula fabricante.
-SELECT *
+SELECT f.nombre
 FROM 
-	tienda.fabricante
+	tienda.fabricante f
 LIMIT 5;
 
 -- 17. Retorna una llista amb 2 files a partir de la quarta fila de la taula fabricante. La quarta fila també s'ha d'incloure en la resposta.
-SELECT *
+SELECT f.nombre
 FROM 
-	tienda.fabricante
+	tienda.fabricante f
 LIMIT 2 OFFSET 3;
 
 -- 18. Llista el nom i el preu del producte més barat. (Utilitza solament les clàusules ORDER BY i LIMIT).
 SELECT 
-	nombre, precio
+	p.nombre, 
+    p.precio
 FROM 
-	tienda.producto
-ORDER BY precio ASC
+	tienda.producto p
+ORDER BY p.precio ASC
 LIMIT 1;
 
 -- 19. Llista el nom i el preu del producte més car. (Utilitza solament les clàusules ORDER BY i LIMIT).
 SELECT 
-	nombre, precio
+	p.nombre, 
+    p.precio
 FROM 
-	tienda.producto
-ORDER BY precio DESC
+	tienda.producto p
+ORDER BY p.precio DESC
 LIMIT 1;
 
 -- 20. Llista el nom de tots els productes del fabricant el codi de fabricant del qual és igual a 2.
 SELECT 
-	nombre
+	p.nombre
 FROM 
-	tienda.producto
+	tienda.producto p
 WHERE 
-	codigo_fabricante = 2;
+	p.codigo_fabricante = 2;
     
 -- 21. Retorna una llista amb el nom del producte, preu i nom de fabricant (nombre del fabricante) de tots els productes de la base de dades.
 SELECT 
-	p.nombre AS `nombre del producto`,
+	p.nombre,
     p.precio,
     f.nombre AS `nombre del fabricante`
 FROM 
@@ -149,7 +151,7 @@ JOIN
     
 -- 22. Llista tots els productes amb nom, preu i nom del fabricant (nombre del fabricante) ordenats alfabèticament.
 SELECT 
-	p.nombre AS `nombre del producto`,
+	p.nombre,
     p.precio,
     f.nombre AS `nombre del fabricante`
 FROM 
@@ -160,8 +162,8 @@ ORDER BY f.nombre ASC;
 
 -- 23. Retorna una llista amb el codi del producte, nom del producte, codi del fabricant (codigo fabricante) i nom del fabricant (nombre fabricante), de tots els productes de la base de dades.
 SELECT 
-	p.codigo AS `código producto`,
-	p.nombre AS `nombre del producto`,
+	p.codigo,
+	p.nombre,
 	f.codigo AS `código del fabricante`,
     f.nombre AS `nombre del fabricante`
 FROM 
@@ -171,9 +173,9 @@ JOIN
 
 -- 24. Retorna el nom, el preu i el nom del fabricant (fabricante), del producte més barat.
 SELECT 
-	p.nombre AS `nombre del producto más barato`,
-    p.precio AS `precio del producto`,
-    f.nombre AS `nombre del fabricante`
+	p.nombre,
+    p.precio,
+    f.nombre AS fabricant
 FROM 
 	tienda.producto p
 JOIN
@@ -183,9 +185,9 @@ LIMIT 1;
     
 -- 25. Retorna el nom del producte, el preu i el nom del seu fabricant (fabricante), del producte més car.
 SELECT 
-	p.nombre AS `nombre del producto más caro`,
-    p.precio AS `precio del producto`,
-    f.nombre AS `nombre del fabricante`
+	p.nombre,
+    p.precio,
+    f.nombre AS fabricante
 FROM 
 	tienda.producto p
 JOIN
@@ -287,7 +289,7 @@ ORDER BY
 -- 33. Retorna un llistat amb el codi i el nom de fabricant (fabricante), solament d'aquells fabricants que tenen productes associats en la base de dades.
 SELECT DISTINCT
 	f.codigo,
-    f.nombre AS fabricante
+    f.nombre
 FROM 
 	tienda.fabricante f
 JOIN 
@@ -314,13 +316,15 @@ WHERE
     
 -- 36. Retorna tots els productes del fabricant Lenovo. (Sense utilitzar INNER JOIN).
 SELECT
-    p.nombre
+    *
 FROM 
 	tienda.producto p
-JOIN
-	tienda.fabricante f ON f.codigo = p.codigo_fabricante
 WHERE 
-	f.nombre = "Lenovo";
+	p.codigo_fabricante = (
+    SELECT f.codigo
+    FROM tienda.fabricante f
+    WHERE f.nombre = "Lenovo"
+    );
 
 -- 37. Retorna totes les dades dels productes que tenen el mateix preu que el producte més car del fabricant Lenovo. (Sense usar INNER JOIN).
 SELECT *
@@ -353,7 +357,9 @@ WHERE
 );
 
 -- 39. Llista el nom del producte més barat del fabricant Hewlett-Packard.
-SELECT * FROM 
+SELECT 
+	p.nombre
+FROM 
 	tienda.producto p
 WHERE 
 	p.precio = (
@@ -381,6 +387,7 @@ WHERE p.precio >= (
 );
 
 -- 41. Llista tots els productes del fabricant Asus que tenen un preu superior al preu mitjà de tots els seus productes.
+
 SELECT *
 FROM tienda.producto p
 WHERE p.codigo_fabricante = (
@@ -396,4 +403,4 @@ p.precio > (
 		FROM tienda.fabricante f
         WHERE f.nombre ="Asus")
 );
-          
+   
