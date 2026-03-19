@@ -102,13 +102,13 @@ ORDER BY
 	p.precio DESC;
     
 -- 16. Retorna una llista amb les 5 primeres files de la taula fabricante.
-SELECT f.nombre
+SELECT *
 FROM 
 	tienda.fabricante f
 LIMIT 5;
 
 -- 17. Retorna una llista amb 2 files a partir de la quarta fila de la taula fabricante. La quarta fila també s'ha d'incloure en la resposta.
-SELECT f.nombre
+SELECT *
 FROM 
 	tienda.fabricante f
 LIMIT 2 OFFSET 3;
@@ -164,7 +164,7 @@ ORDER BY f.nombre ASC;
 SELECT 
 	p.codigo,
 	p.nombre,
-	f.codigo AS `código del fabricante`,
+	f.codigo AS `codigo del fabricante`,
     f.nombre AS `nombre del fabricante`
 FROM 
 	tienda.producto p
@@ -387,7 +387,6 @@ WHERE p.precio >= (
 );
 
 -- 41. Llista tots els productes del fabricant Asus que tenen un preu superior al preu mitjà de tots els seus productes.
-
 SELECT *
 FROM tienda.producto p
 WHERE p.codigo_fabricante = (
@@ -403,4 +402,3 @@ p.precio > (
 		FROM tienda.fabricante f
         WHERE f.nombre ="Asus")
 );
-   
