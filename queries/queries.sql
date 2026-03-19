@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------
+-- STORE DATABASE
+-- ---------------------------------------------------------
+
 -- 1. Llista el nom de tots els productes que hi ha en la taula producto.
 SELECT 
 	p.nombre 
@@ -164,8 +168,8 @@ ORDER BY f.nombre ASC;
 SELECT 
 	p.codigo,
 	p.nombre,
-	f.codigo AS `codigo del fabricante`,
-    f.nombre AS `nombre del fabricante`
+	f.codigo AS `codigo fabricante`,
+    f.nombre AS `nombre fabricante`
 FROM 
 	tienda.producto p
 JOIN 
